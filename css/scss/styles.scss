@@ -1,0 +1,275 @@
+@use 'sass:math';
+
+:root {
+  /* colors */
+  --primary-color: #292D33;
+  --secondary-color: #6C6E71;
+  --accent-color: #D4491B;
+  --foreground-color: #F3F4EC;
+  /* typography */
+  --font-heading: "indivisible", sans-serif;
+  --font-body: "turnip", serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+body,
+p,
+div,
+span,
+li,
+a {
+  font-family: var(--font-body);
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+.btn {
+  display: block;
+  border: 0px;
+  padding: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 24px;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  text-align: center;
+  font-family: var(--font-heading);
+  color: #fff;
+  max-width: 280px;
+  width: 100%;
+  
+  &:hover {
+    background-color: var(--accent-color);
+  }
+}
+
+
+/* font-sizes */
+.text-md {
+  font-size: 20px;
+  line-height: 31.5px;
+
+  @media (max-width: 1024px) {
+    font-size: 17px;
+    line-height: 29px;
+  }
+}
+.text-lg {
+  font-size: 50px;
+
+  @media (max-width: 1024px) {
+    font-size: 32px;
+  }
+}
+.text-sm {
+  font-family: var(--font-heading);
+}
+
+/* weight */
+.font-medium {
+  font-weight: 500;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.font-bold {
+  font-weight: 700;
+}
+
+/* fonts */
+.font-heading {
+  font-family: var(--font-heading);
+}
+.font-body {
+  font-family: var(--font-body);
+}
+
+/* font-colors */
+.text-primary {
+  color: var(--primary-color);
+}
+.text-secondary {
+  color: var(--secondary-color);
+}
+.text-accent {
+  color: var(--accent-color);
+}
+
+.bg-primary {
+  background-color: var(--primary-color);
+}
+.bg-secondary {
+  background-color: var(--secondary-color);
+}
+.bg-accent {
+  background-color: var(--accent-color);
+}
+.bg-foreground {
+  background-color: var(--foreground-color);
+}
+
+
+/* column */
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    width: math.percentage(math.div($i, 12));
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+}
+
+$spacing-unit: 4px;
+$steps: 20;
+
+@mixin spacing-utilities($unit) {
+  @for $i from 0 through $steps {
+    $value: $i * $unit;
+
+    // Padding
+    .p-#{$i}  { padding: $value; }
+    .px-#{$i} { padding-left: $value; padding-right: $value; }
+    .py-#{$i} { padding-top: $value; padding-bottom: $value; }
+    .pt-#{$i} { padding-top: $value; }
+    .pb-#{$i} { padding-bottom: $value; }
+    .pl-#{$i} { padding-left: $value; }
+    .pr-#{$i} { padding-right: $value; }
+
+    // Margin
+    .m-#{$i}  { margin: $value; }
+    .mx-#{$i} { margin-left: $value; margin-right: $value; }
+    .my-#{$i} { margin-top: $value; margin-bottom: $value; }
+    .mt-#{$i} { margin-top: $value; }
+    .mb-#{$i} { margin-bottom: $value; }
+    .ml-#{$i} { margin-left: $value; }
+    .mr-#{$i} { margin-right: $value; }
+  }
+}
+
+// Default: 4px base
+@include spacing-utilities(4px);
+
+// ≤ 1024px: 2px base
+@media (max-width: 1024px) {
+  @include spacing-utilities(2px);
+}
+
+// ≤ 768px: 1.5px base
+@media (max-width: 768px) {
+  @include spacing-utilities(1.5px);
+}
+
+// ≤ 550px: 1.5px base
+@media (max-width: 768px) {
+  @include spacing-utilities(1px);
+}
+
+
+
+.row {
+  display: flex;
+  align-items: stretch;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 16px 16px 0px 16px;
+    border: 1px solid rgba(0,0,0, .07);
+    border-radius: 12px;
+    overflow: hidden;
+    
+    &.row-reverse {
+      
+      .col-6:nth-child(1) {
+        order: 2;
+      }
+      .col-6:nth-child(2) {
+        order: 1;
+      }
+    }
+  }
+  
+  .content {
+    height: 100%;
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @media (max-width: 768px) {
+      align-items: center;
+
+      h1,
+      p,
+      span {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 550px) {
+      h1 {
+        margin-bottom: 16px;
+      }
+      p {
+        margin-bottom: 24px;
+      }
+    }
+  }
+
+  .image {
+    height: 100%;
+    
+    .img {
+      height: 100%;
+      object-fit: cover;
+
+      @media (max-width: 1024px) {
+        height: 600px;
+      }
+
+      @media (max-width: 768px) {
+        height: 362px;
+      }
+    }
+  }
+}
