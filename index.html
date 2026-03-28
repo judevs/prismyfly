@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="https://use.typekit.net/abd0ulq.css">
   <link rel="stylesheet" href="https://use.typekit.net/mcy6kmg.css">
-  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="css/slick.css"/>
 </head>
 <body>
 
@@ -58,9 +58,39 @@
     </div>
   </section>
 
-  <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+  <script type="text/javascript" src="js/slick.js"></script>
+  
+  <script type="text/javascript">
+    $(document).ready(function () {
+      const $slider = $('.slider-container');
 
-  <script type="text/javascript" src="js/index.js"></script>
+      const slickSettings = {
+        dots: true,
+        arrows: false,
+        infinite: true,
+        speed: 400,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        adaptiveHeight: true,
+      };
+
+      const initSlider = () => {
+        if ($(window).width() < 768) {
+          if (!$slider.hasClass('slick-initialized')) {
+            $slider.slick(slickSettings);
+          }
+        } else {
+          if ($slider.hasClass('slick-initialized')) {
+            $slider.slick('unslick');
+          }
+        }
+      };
+
+      initSlider();
+      $(window).on('resize', initSlider);
+    });
+  </script>
 </body>
 </html>

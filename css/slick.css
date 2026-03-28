@@ -113,3 +113,35 @@
 .slick-arrow.slick-hidden {
   display: none;
 }
+
+.slick-dots {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.slick-dots li button {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  border: none;
+  padding: 0;
+  font-size: 0;
+  /* hides the number text */
+  background-color: #D3D1C7;
+  /* inactive color */
+  cursor: pointer;
+  transition: width 0.25s ease, background-color 0.25s ease;
+}
+
+.slick-dots li.slick-active button {
+  width: 24px;
+  background-color: #E24B4A;
+  /* your red */
+}
